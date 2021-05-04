@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.gestionfacturation.bean.Client;
 import com.example.gestionfacturation.bean.Commande;
+import com.example.gestionfacturation.bean.Devis;
 import com.example.gestionfacturation.bean.Facture;
 import com.example.gestionfacturation.bean.FactureEtat;
 import com.example.gestionfacturation.bean.FactureStatut;
@@ -56,9 +57,7 @@ public List<Facture> findAll() {
 	return factureDao.findAll();
 }
 public int saveS(Facture facture) {
-//	if(findByReference(facture.getReference())!=null) {
-//		return -1;
-//	}	
+
 Client client =clientService.findByReference(facture.getClient().getReference());
 	facture.setClient(client);
 
@@ -87,30 +86,25 @@ public int save(Facture facture) {
 	facture.setClient(client);
 	Commande commande = commandeService.findByReference(facture.getCommande().getReference());
 	facture.setCommande(commande);
-//	FactureEtat factureEtat=factureEtatService.findByReference(facture.getFactureEtat().getReference());
-//	facture.setFactureEtat(factureEtat);
-//	FactureStatut factureStatut=factureStatutService.findByReference(facture.getFactureStatut().getReference());
-//	facture.setFactureStatut(factureStatut);
+	Devis devis=devisService.findByReference(facture.getDevis().getReference());
+	facture.setDevis(devis);
+
 	if(client==null) {
 		return -2;
 	}
-//	if(factureEtat==null) {
-//		return -3;
-//	}
-//	if(factureStatut==null) {
-//		return -4;
-//	}
-	if(commande==null) {
-		return -5;
+	if(devis==null) {
+		return -3;
 	}
-	 
+
+	if(commande==null) {
+		return -4;
+	}
 		prepare(facture);
 		currencyService.save(facture.getCurrency());
-		devisService.save(facture.getDevis());
-
-		//commandeService.save(facture.getCommande());
-		
+		factureEtatService.save(facture.getFactureEtat());
+		factureStatutService.save(facture.getFactureStatut());
 	    factureDao.save(facture);
+	    paimentService.save(facture,facture.getPaiments());
 	return 1;
 	
 }

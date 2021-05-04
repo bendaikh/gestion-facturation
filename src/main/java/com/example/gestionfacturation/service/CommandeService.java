@@ -36,7 +36,6 @@ public class CommandeService {
         else{
             currencyService.save(commande.getCurrency());
             factureService.saveS(commande.getFacture());
-           //  devisService.save(commande.getDevise());
 
             commandeDao.save(commande);         
             
@@ -50,8 +49,6 @@ public class CommandeService {
     }
     @Autowired
     private DeliveryService deliveryService;
-//    @Autowired
-//    private DevisService devisService;
 
     @Autowired
     private CommandeDao commandeDao;

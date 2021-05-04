@@ -44,20 +44,20 @@ public class Facture {
 	private boolean transmise;
 	private boolean comptabilise;
 	private boolean en_litige;
-//	@ManyToOne
-//	private FactureEtat factureEtat;
-//	@ManyToOne
-//	private FactureStatut factureStatut;
-//	@JsonProperty(access =  JsonProperty.Access.WRITE_ONLY)
-//	@OneToMany(mappedBy = "facture")
-//	private List<Paiment> paiments;
-//	
-//	public List<Paiment> getPaiments() {
-//		return paiments;
-//	}
-//	public void setPaiments(List<Paiment> paiments) {
-//		this.paiments = paiments;
-//	}
+	@ManyToOne(cascade = CascadeType.ALL)
+	private FactureEtat factureEtat;
+	@ManyToOne(cascade = CascadeType.ALL)
+	private FactureStatut factureStatut;
+	@JsonProperty(access =  JsonProperty.Access.WRITE_ONLY)
+	@OneToMany(mappedBy = "facture")
+	private List<Paiment> paiments;
+	
+	public List<Paiment> getPaiments() {
+		return paiments;
+	}
+	public void setPaiments(List<Paiment> paiments) {
+		this.paiments = paiments;
+	}
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Client client;
 	
@@ -206,18 +206,18 @@ public class Facture {
 	public void setEn_litige(boolean en_litige) {
 		this.en_litige = en_litige;
 	}
-//	public FactureEtat getFactureEtat() {
-//		return factureEtat;
-//	}
-//	public void setFactureEtat(FactureEtat factureEtat) {
-//		this.factureEtat = factureEtat;
-//	}
-//	public FactureStatut getFactureStatut() {
-//		return factureStatut;
-//	}
-//	public void setFactureStatut(FactureStatut factureStatut) {
-//		this.factureStatut = factureStatut;
-//	}
+	public FactureEtat getFactureEtat() {
+		return factureEtat;
+	}
+	public void setFactureEtat(FactureEtat factureEtat) {
+		this.factureEtat = factureEtat;
+	}
+	public FactureStatut getFactureStatut() {
+		return factureStatut;
+	}
+	public void setFactureStatut(FactureStatut factureStatut) {
+		this.factureStatut = factureStatut;
+	}
 	public Client getClient() {
 		return client;
 	}

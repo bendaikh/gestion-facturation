@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.gestionfacturation.bean.Facture;
 import com.example.gestionfacturation.bean.Paiment;
-import com.example.gestionfacturation.bean.PaimentMethode;
 import com.example.gestionfacturation.dao.PaimentDao;
 
 @Service
@@ -19,6 +18,8 @@ private PaimentDao paimentDao;
 private FactureService factureService;
 @Autowired
 private PaimentMethodeService paimentMethodeService;
+@Autowired
+private CurrencyService currencyService;
 public Paiment findByReference(String reference) {
 	return paimentDao.findByReference(reference);
 }
@@ -56,21 +57,19 @@ public Integer count(String reference) {
 		}}
 		Facture facture= factureService.findByReference(paiment.getFacture().getReference());
 		paiment.setFacture(facture);
-		PaimentMethode paimentMethode=paimentMethodeService.findByReference(paiment.getPaimentMethode().getReference());
-		paiment.setPaimentMethode(paimentMethode);
 		
 		if(facture==null) {
 			return -2;
 		}
-		if(paimentMethode==null) {
-			return -3;
-		}
+		
 		else {
 			
-					prepare(paiment);
-
-
+		prepare(paiment);
+		
+		paimentMethodeService.save(paiment.getPaimentMethode());
+		currencyService.save(paiment.getCurrency());
 		paimentDao.save(paiment);
+		
 		return 1;
 		
 		}
@@ -96,5 +95,13 @@ paiment.setReste(reste);
 		save(paiment);
 		
 	}
+
+	public void save(Facture facture, List<Paiment> paiments) {
+		for(Paiment paiment:paiments) {
+			paiment.setFacture(facture);
+			paimentDao.save(paiment);
+		}
+	}
+	
 
 }

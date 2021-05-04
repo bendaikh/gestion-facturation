@@ -32,8 +32,10 @@ public class DeliveryService {
 
         public void save(Commande commande, List<Delivery> deliveries) {
         for (Delivery delivery: deliveries) {
+        	delivery.setCommande(commande);
             deliveryDao.save(delivery);
 
         }
     }
+        
 }

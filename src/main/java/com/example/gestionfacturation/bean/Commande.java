@@ -21,9 +21,7 @@ public class Commande implements Serializable {
     private Date date_Commande;
     private double montant;
     private String commentaire;
-//    @OneToOne
-//    private Devis devis;
-   
+
     //private Agent agent;
     @ManyToOne(cascade = CascadeType.ALL)
     private Client client;
@@ -55,13 +53,6 @@ public class Commande implements Serializable {
 
    
 
-//    public Devis getDevis() {
-//		return devis;
-//	}
-//
-//	public void setDevis(Devis devis) {
-//		this.devis = devis;
-//	}
 
 	public Long getId() {
         return id;

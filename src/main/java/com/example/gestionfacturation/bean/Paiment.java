@@ -2,6 +2,7 @@ package com.example.gestionfacturation.bean;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,7 +29,7 @@ public class Paiment {
 
 	@ManyToOne
 	private Facture facture;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Currency currency;
 	
 	public Currency getCurrency() {
@@ -44,7 +45,7 @@ public class Paiment {
 		this.reste = reste;
 	}
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private PaimentMethode paimentMethode;
 	
 	public PaimentMethode getPaimentMethode() {
