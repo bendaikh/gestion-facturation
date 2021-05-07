@@ -21,28 +21,19 @@ public class Commande implements Serializable {
     private Date date_Commande;
     private double montant;
     private String commentaire;
-
-    //private Agent agent;
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Client client;
     private Commande_Status commande_status;
-	@OneToOne
-    private Facture facture;
-    
-    public Facture getFacture() {
-		return facture;
-	}
-
-	public void setFacture(Facture facture) {
-		this.facture = facture;
-	}
-
-	@ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    private Client client;
+   @ManyToOne
     private Currency currency;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "commande")
     private List<Delivery> deliveries;
 
+   
+
+	
+    
     public List<Delivery> getDeliveries() {
         return deliveries;
     }

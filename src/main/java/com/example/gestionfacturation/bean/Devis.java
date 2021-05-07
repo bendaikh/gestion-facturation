@@ -32,11 +32,10 @@ public class Devis implements Serializable {
     private Date date_creation;
     @OneToOne
     private Commande commande;
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Client client;
-    @ManyToOne(cascade = CascadeType.ALL)
+    
+    @ManyToOne
     private Currency currency;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private QuotationStatus quotation_status;
  
 	public Long getId() {
@@ -71,14 +70,7 @@ public class Devis implements Serializable {
         this.expedition = expedition;
     }
 
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
+ 
     public String getCommerciale() {
         return commerciale;
     }
@@ -220,7 +212,11 @@ public class Devis implements Serializable {
     }
 
 
-    public Commande getCommande() {
+    public void setQuotation_status(QuotationStatus quotation_status) {
+		this.quotation_status = quotation_status;
+	}
+
+	public Commande getCommande() {
         return commande;
     }
 

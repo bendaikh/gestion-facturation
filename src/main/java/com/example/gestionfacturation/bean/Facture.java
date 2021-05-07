@@ -44,28 +44,19 @@ public class Facture {
 	private boolean transmise;
 	private boolean comptabilise;
 	private boolean en_litige;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private FactureEtat factureEtat;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private FactureStatut factureStatut;
-	@JsonProperty(access =  JsonProperty.Access.WRITE_ONLY)
-	@OneToMany(mappedBy = "facture")
-	private List<Paiment> paiments;
 	
-	public List<Paiment> getPaiments() {
-		return paiments;
-	}
-	public void setPaiments(List<Paiment> paiments) {
-		this.paiments = paiments;
-	}
-	@ManyToOne(cascade = CascadeType.ALL)
-	private Client client;
-	
-		@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
+	private Commande commande;
+
+	@ManyToOne
 	private Currency currency;
 	
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	private Devis devis;
 	
 	public Devis getDevis() {
@@ -74,9 +65,7 @@ public class Facture {
 	public void setDevis(Devis devis) {
 		this.devis = devis;
 	}
-	@OneToOne
-	@NotNull
-	private Commande commande;
+
 	
 	public Commande getCommande() {
 		return commande;
@@ -218,12 +207,7 @@ public class Facture {
 	public void setFactureStatut(FactureStatut factureStatut) {
 		this.factureStatut = factureStatut;
 	}
-	public Client getClient() {
-		return client;
-	}
-	public void setClient(Client client) {
-		this.client = client;
-	}
+
 	
 	
 	

@@ -8,8 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -29,8 +28,10 @@ public class Paiment {
 
 	@ManyToOne
 	private Facture facture;
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private Currency currency;
+	@ManyToOne
+	private PaimentMethode paimentMethode;
 	
 	public Currency getCurrency() {
 		return currency;
@@ -45,8 +46,6 @@ public class Paiment {
 		this.reste = reste;
 	}
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	private PaimentMethode paimentMethode;
 	
 	public PaimentMethode getPaimentMethode() {
 		return paimentMethode;

@@ -3,6 +3,8 @@ package com.example.gestionfacturation.service;
 import com.example.gestionfacturation.dao.CommandeDao;
 import com.example.gestionfacturation.bean.Client;
 import com.example.gestionfacturation.bean.Commande;
+import com.example.gestionfacturation.bean.Currency;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,12 +32,15 @@ public class CommandeService {
         }
         Client client =clientService.findByReference(commande.getClient().getReference());
         commande.setClient(client);
+        Currency currency=currencyService.findByCode(commande.getCurrency().getCode());
+        commande.setCurrency(currency);
         if(client==null) {
         	return -2;
         }
+        if(currency==null) {
+        	return -3;
+        }
         else{
-            currencyService.save(commande.getCurrency());
-            factureService.saveS(commande.getFacture());
 
             commandeDao.save(commande);         
             
@@ -57,8 +62,6 @@ public class CommandeService {
     private ClientService clientService;
     @Autowired
     private CurrencyService currencyService;
-    @Autowired
-    private FactureService factureService;
-
+ 
 
  }

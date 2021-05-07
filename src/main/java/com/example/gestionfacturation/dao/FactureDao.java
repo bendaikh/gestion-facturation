@@ -17,6 +17,6 @@ public interface FactureDao extends JpaRepository<Facture, Long> {
  @Query("select f from Facture f where f.reference LIKE %?1%")
  public List<Facture> findByRef(@Param("reference")String reference);
  public List<Facture> findByDateCreation(Date dateCreation);
- @Query("select count(f) from Facture f where f.client.reference=:reference")
+ @Query("select count(f) from Facture f where f.commande.client.reference=:reference")
  public Integer count(@Param("reference")String reference);
 }

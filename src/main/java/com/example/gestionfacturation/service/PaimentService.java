@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.gestionfacturation.bean.Currency;
 import com.example.gestionfacturation.bean.Facture;
 import com.example.gestionfacturation.bean.Paiment;
+import com.example.gestionfacturation.bean.PaimentMethode;
 import com.example.gestionfacturation.dao.PaimentDao;
 
 @Service
@@ -57,21 +59,25 @@ public Integer count(String reference) {
 		}}
 		Facture facture= factureService.findByReference(paiment.getFacture().getReference());
 		paiment.setFacture(facture);
-		
+		PaimentMethode paimentMethode=paimentMethodeService.findByReference(paiment.getPaimentMethode().getReference());
+		paiment.setPaimentMethode(paimentMethode);
+		Currency currency = currencyService.findByCode(paiment.getCurrency().getCode());
+		paiment.setCurrency(currency);
 		if(facture==null) {
 			return -2;
 		}
-		
+		if(paimentMethode==null) {
+			return -3;
+		}
+		if(currency==null) {
+			return -4;
+		}
 		else {
 			
 		prepare(paiment);
-		
-		paimentMethodeService.save(paiment.getPaimentMethode());
-		currencyService.save(paiment.getCurrency());
 		paimentDao.save(paiment);
 		
-		return 1;
-		
+		return 1;	
 		}
 	}
 	
@@ -96,12 +102,6 @@ paiment.setReste(reste);
 		
 	}
 
-	public void save(Facture facture, List<Paiment> paiments) {
-		for(Paiment paiment:paiments) {
-			paiment.setFacture(facture);
-			paimentDao.save(paiment);
-		}
-	}
 	
 
 }
