@@ -5,13 +5,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-
 @Entity
-public class PaimentMethode {
+public class CommandeType {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String reference;
-	private String nom  ;
+	private String code;
+	private String nom;
 	
 	public Long getId() {
 		return id;
@@ -19,11 +18,11 @@ public class PaimentMethode {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getReference() {
-		return reference;
+	public String getCode() {
+		return code;
 	}
-	public void setReference(String reference) {
-		this.reference = reference;
+	public void setCode(String code) {
+		this.code = code;
 	}
 	public String getNom() {
 		return nom;
@@ -31,9 +30,5 @@ public class PaimentMethode {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	
-	
-	
-	
 	
 }

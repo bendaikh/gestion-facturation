@@ -1,6 +1,4 @@
 package com.example.gestionfacturation.bean;
-import com.example.gestionfacturation.enumeration.CommandeType;
-import com.example.gestionfacturation.enumeration.Expedition;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,9 +11,7 @@ public class Devis implements Serializable {
     private Long id;
     private String reference;
     private Date date_devis;
-    private Expedition expedition;
-    private String commerciale;
-    private CommandeType type;
+    private String commerciale; 
     private Date date_echange;
     private String depart;
     private String arrive;
@@ -30,6 +26,10 @@ public class Devis implements Serializable {
     private String note;
     private String commentaire;
     private Date date_creation;
+    @ManyToOne
+    private Expedition expedition;
+    @ManyToOne
+    private CommandeType type;
     @OneToOne
     private Commande commande;
     

@@ -1,8 +1,6 @@
 package com.example.gestionfacturation.bean;
 
-import com.example.gestionfacturation.enumeration.CommandeType;
-import com.example.gestionfacturation.enumeration.Commande_Status;
-import com.example.gestionfacturation.enumeration.Expedition;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -16,12 +14,15 @@ public class Commande implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String reference;
-    private CommandeType commandeType;
-    private Expedition expedition;
     private Date date_Commande;
     private double montant;
     private String commentaire;
-    private Commande_Status commande_status;
+    @ManyToOne
+    private CommandeStatut commandestatut;
+    @ManyToOne
+    private CommandeType commandeType;
+    @ManyToOne
+    private Expedition expedition;
     @ManyToOne
     private Client client;
    @ManyToOne
@@ -109,17 +110,19 @@ public class Commande implements Serializable {
         this.client = client;
     }
 
-    public Commande_Status getCommande_status() {
-        return commande_status;
-    }
-
-    public void setCommande_status(Commande_Status commande_status) {
-        this.commande_status = commande_status;
-    }
 
 
 
-    public Currency getCurrency() {
+
+    public CommandeStatut getCommandestatut() {
+		return commandestatut;
+	}
+
+	public void setCommandestatut(CommandeStatut commandestatut) {
+		this.commandestatut = commandestatut;
+	}
+
+	public Currency getCurrency() {
         return currency;
     }
 

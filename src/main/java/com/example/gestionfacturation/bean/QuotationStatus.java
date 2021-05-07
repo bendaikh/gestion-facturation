@@ -1,8 +1,5 @@
 package com.example.gestionfacturation.bean;
 
-import com.example.gestionfacturation.enumeration.Quotation_status_name_eng;
-import com.example.gestionfacturation.enumeration.Quotation_status_name_fre;
-import com.example.gestionfacturation.enumeration.Quotation_status_name_spa;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,10 +13,8 @@ public class QuotationStatus implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String code;
-    private Quotation_status_name_eng quotation_status_name_eng;
-    private Quotation_status_name_fre quotation_status_name_fre;
-    private Quotation_status_name_spa quotation_status_name_spa;
-
+    private String nom;
+  
     public Long getId() {
         return id;
     }
@@ -36,27 +31,13 @@ public class QuotationStatus implements Serializable {
         this.code = code;
     }
 
-    public Quotation_status_name_eng getQuotation_status_name_eng() {
-        return quotation_status_name_eng;
-    }
+	public String getNom() {
+		return nom;
+	}
 
-    public void setQuotation_status_name_eng(Quotation_status_name_eng quotation_status_name_eng) {
-        this.quotation_status_name_eng = quotation_status_name_eng;
-    }
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
 
-    public Quotation_status_name_fre getQuotation_status_name_fre() {
-        return quotation_status_name_fre;
-    }
-
-    public void setQuotation_status_name_fre(Quotation_status_name_fre quotation_status_name_fre) {
-        this.quotation_status_name_fre = quotation_status_name_fre;
-    }
-
-    public Quotation_status_name_spa getQuotation_status_name_spa() {
-        return quotation_status_name_spa;
-    }
-
-    public void setQuotation_status_name_spa(Quotation_status_name_spa quotation_status_name_spa) {
-        this.quotation_status_name_spa = quotation_status_name_spa;
-    }
+ 
 }
