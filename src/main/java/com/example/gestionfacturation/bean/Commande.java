@@ -1,9 +1,13 @@
 package com.example.gestionfacturation.bean;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -14,6 +18,7 @@ public class Commande implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String reference;
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date date_Commande;
     private double montant;
     private String commentaire;

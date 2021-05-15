@@ -29,5 +29,9 @@ public class FactureEtatWs {
 	public int save(@RequestBody FactureEtat factureEtat) {
 	return factureEtatService.save(factureEtat);
 	}
+	@GetMapping("/nom/{nom}")
+	public FactureEtat findByNom(@PathVariable String nom) {
+		return factureEtatService.findByNom(nom);
+	}
 
 }

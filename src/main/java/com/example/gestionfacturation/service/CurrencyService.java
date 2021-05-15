@@ -17,7 +17,11 @@ public class CurrencyService {
         return currencyDao.listOfCurrency(mc);
     }
 
-    public int deleteByCode(String code) {
+    public Currency findByNom(String nom) {
+		return currencyDao.findByNom(nom);
+	}
+
+	public int deleteByCode(String code) {
         return currencyDao.deleteByCode(code);
     }
 

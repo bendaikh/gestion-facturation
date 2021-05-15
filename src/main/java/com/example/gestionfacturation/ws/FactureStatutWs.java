@@ -29,6 +29,10 @@ public class FactureStatutWs {
 	public int save(@RequestBody FactureStatut factureStatut) {
 		return factureStatutService.save(factureStatut);
 	}
+	@GetMapping("/nom/{nom}")
+	public FactureStatut findByNom(@PathVariable String nom) {
+		return factureStatutService.findByNom(nom);
+	}
 	
 	
 	

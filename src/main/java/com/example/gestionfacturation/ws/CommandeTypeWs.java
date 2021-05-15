@@ -30,6 +30,10 @@ public int save(@RequestBody CommandeType commandeType) {
 public List<CommandeType> findAll() {
 	return commandeTypeService.findAll();
 }
+@GetMapping("/nom/{nom}")
+public CommandeType findByNom(@PathVariable String nom) {
+	return commandeTypeService.findByNom(nom);
+}
 
 
 }

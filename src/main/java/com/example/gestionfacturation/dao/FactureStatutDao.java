@@ -8,4 +8,6 @@ import com.example.gestionfacturation.bean.FactureStatut;
 @Repository
 public interface FactureStatutDao extends JpaRepository<FactureStatut, Long> {
  public FactureStatut findByReference(String reference);
+ public FactureStatut findByNom(String nom);
+
 }

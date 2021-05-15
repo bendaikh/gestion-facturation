@@ -27,6 +27,9 @@ public class CommandeStatutService {
 	         
 	    }
 
+	public CommandeStatut findByNom(String nom) {
+		return commandeStatutDao.findByNom(nom);
+	}
 	public List<CommandeStatut> findAll() {
 		return commandeStatutDao.findAll();
 	}

@@ -28,8 +28,12 @@ public class CurrencyWS {
     public int save(@RequestBody Currency currency) {
         return currencyService.save(currency);
     }
+    @GetMapping("/nom/{nom}")
+    public Currency findByNom(@PathVariable String nom) {
+		return currencyService.findByNom(nom);
+	}
 
-    @Autowired
+	@Autowired
     private CurrencyService currencyService;
 
 }

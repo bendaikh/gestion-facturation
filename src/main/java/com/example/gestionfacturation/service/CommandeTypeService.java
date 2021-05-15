@@ -17,7 +17,11 @@ public class CommandeTypeService {
 		return commandeTypeDao.findByCode(code);
 	}
 
-	 public int save(CommandeType commandeType) {
+	 public CommandeType findByNom(String nom) {
+		return commandeTypeDao.findByNom(nom);
+	}
+
+	public int save(CommandeType commandeType) {
 	    	if(findByCode(commandeType.getCode())!=null) {
 	    		return -1;
 	    	}

@@ -17,6 +17,10 @@ public PaimentMethode findByReference(String reference) {
 	return paimentMethodeDao.findByReference(reference);
 }
 
+public PaimentMethode findByNom(String nom) {
+	return paimentMethodeDao.findByNom(nom);
+}
+
 public List<PaimentMethode> findAll() {
 	return paimentMethodeDao.findAll();
 }

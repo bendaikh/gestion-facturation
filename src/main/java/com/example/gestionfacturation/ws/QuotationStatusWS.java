@@ -26,8 +26,12 @@ public class QuotationStatusWS {
     public int save(@RequestBody QuotationStatus quotationStatus) {
         return quotationStatusService.save(quotationStatus);
     }
+    @GetMapping("/nom/{nom}")
+    public QuotationStatus findByNom(@PathVariable String nom) {
+		return quotationStatusService.findByNom(nom);
+	}
 
-    @Autowired
+	@Autowired
     private QuotationStatusService quotationStatusService;
 
 }

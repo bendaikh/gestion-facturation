@@ -7,5 +7,6 @@ import com.example.gestionfacturation.bean.CommandeType;
 @Repository
 public interface CommandeTypeDao extends JpaRepository<CommandeType,Long> {
 	public  CommandeType findByCode(String code);
+	public  CommandeType findByNom(String nom);
 
 }

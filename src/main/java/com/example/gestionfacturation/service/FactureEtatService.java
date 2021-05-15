@@ -20,6 +20,11 @@ public FactureEtat findByReference(String reference) {
 public List<FactureEtat> findAll() {
 	return factureEtatDao.findAll();
 }
+
+public FactureEtat findByNom(String nom) {
+	return factureEtatDao.findByNom(nom);
+}
+
 public int save(FactureEtat factureEtat) {
 	if(findByReference(factureEtat.getReference())!=null) {
 		return -1;

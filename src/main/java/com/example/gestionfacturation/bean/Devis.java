@@ -1,6 +1,11 @@
 package com.example.gestionfacturation.bean;
 
 import javax.persistence.*;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,8 +15,10 @@ public class Devis implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String reference;
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date date_devis;
     private String commerciale; 
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date date_echange;
     private String depart;
     private String arrive;

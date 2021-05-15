@@ -3,8 +3,10 @@ package com.example.gestionfacturation.service;
 
 import com.example.gestionfacturation.dao.DevisDao;
 import com.example.gestionfacturation.bean.Commande;
+import com.example.gestionfacturation.bean.CommandeType;
 import com.example.gestionfacturation.bean.Currency;
 import com.example.gestionfacturation.bean.Devis;
+import com.example.gestionfacturation.bean.Expedition;
 import com.example.gestionfacturation.bean.QuotationStatus;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,10 @@ public class DevisService {
         devis.setQuotation_status(quotationStatus);
         Commande commande =commandeService.findByReference(devis.getCommande().getReference());
         devis.setCommande(commande);
+        Expedition expedition = expeditionService.findByCode(devis.getExpedition().getCode());
+        devis.setExpedition(expedition);
+        CommandeType commandeType = commandeTypeService.findByCode(devis.getType().getCode());
+        devis.setType(commandeType);
         if(currency==null) {
         	return -2;
         }
@@ -38,6 +44,12 @@ public class DevisService {
         }
         if(commande==null) {
         	return -4;
+        }
+        if(expedition==null) {
+        	return -5;
+        }
+        if(commandeType==null) {
+        	return -6;
         }
         else {
         	        devisDao.save(devis);
@@ -55,5 +67,8 @@ public class DevisService {
 
     @Autowired
     private CurrencyService currencyService;
-
+    @Autowired
+    private ExpeditionService expeditionService;
+    @Autowired
+    private CommandeTypeService commandeTypeService;
 }

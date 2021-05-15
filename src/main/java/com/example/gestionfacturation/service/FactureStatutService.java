@@ -20,6 +20,11 @@ public FactureStatut findByReference(String reference) {
 public List<FactureStatut> findAll() {
 	return factureStatutDao.findAll();
 }
+
+public FactureStatut findByNom(String nom) {
+	return factureStatutDao.findByNom(nom);
+}
+
 public int save(FactureStatut factureStatut) {
 	if(findByReference(factureStatut.getReference())!=null) {
 		return -1;

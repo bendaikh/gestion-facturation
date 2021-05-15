@@ -27,6 +27,10 @@ public class ExpeditionService {
 	     
 	}
 
+	public Expedition findByNom(String nom) {
+		return expeditionDao.findByNom(nom);
+	}
+
 	public List<Expedition> findAll() {
 		return expeditionDao.findAll();
 	}

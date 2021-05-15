@@ -31,5 +31,10 @@ public class ExpeditionWs {
 	public List<Expedition> findAll() {
 		return expeditionService.findAll();
 	}
-	
+@GetMapping("/nom/{nom}")
+public Expedition findByNom(@PathVariable String nom) {
+	return expeditionService.findByNom(nom);
+}
+
+
 }

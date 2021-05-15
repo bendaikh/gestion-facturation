@@ -14,5 +14,6 @@ public interface QuotationStatusDao extends JpaRepository<QuotationStatus,Long> 
     public List<QuotationStatus> listOfQuotationStatus(@Param("mc") String mc);
     public int deleteByCode(String code);
     public QuotationStatus findByCode(String code);
+    public QuotationStatus findByNom(String nom);
 
 }

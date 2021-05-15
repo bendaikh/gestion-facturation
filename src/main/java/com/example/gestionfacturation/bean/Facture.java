@@ -14,6 +14,7 @@ import javax.persistence.OneToOne;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 
+
 @Entity
 public class Facture {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,9 +36,7 @@ public class Facture {
 	private int cdtpaiment;
 	private String notes;
 	private String commentaire;
-	private boolean transmise;
-	private boolean comptabilise;
-	private boolean en_litige;
+	
 	@ManyToOne
 	private FactureEtat factureEtat;
 	@ManyToOne
@@ -171,24 +170,7 @@ public class Facture {
 	public void setCommentaire(String commentaire) {
 		this.commentaire = commentaire;
 	}
-	public boolean isTransmise() {
-		return transmise;
-	}
-	public void setTransmise(boolean transmise) {
-		this.transmise = transmise;
-	}
-	public boolean isComptabilise() {
-		return comptabilise;
-	}
-	public void setComptabilise(boolean comptabilise) {
-		this.comptabilise = comptabilise;
-	}
-	public boolean isEn_litige() {
-		return en_litige;
-	}
-	public void setEn_litige(boolean en_litige) {
-		this.en_litige = en_litige;
-	}
+
 	public FactureEtat getFactureEtat() {
 		return factureEtat;
 	}

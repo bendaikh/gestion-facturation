@@ -33,7 +33,11 @@ public class QuotationStatusService {
          
     }
 
-    @Autowired
+    public QuotationStatus findByNom(String nom) {
+		return quotationStatusDao.findByNom(nom);
+	}
+
+	@Autowired
    private  QuotationStatusDao quotationStatusDao;
 
 }

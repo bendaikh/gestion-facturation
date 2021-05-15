@@ -8,4 +8,6 @@ import com.example.gestionfacturation.bean.FactureEtat;
 @Repository
 public interface FactureEtatDao extends JpaRepository<FactureEtat,Long> {
  public FactureEtat findByReference(String reference);
+ public FactureEtat findByNom(String nom);
+
 }

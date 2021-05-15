@@ -26,6 +26,10 @@ public CommandeStatut findByCode(@PathVariable String code) {
 public int save(@RequestBody CommandeStatut commandeStatut) {
 	return commandeStatutService.save(commandeStatut);
 }
+@GetMapping("/nom/{nom}")
+public CommandeStatut findByNom(@PathVariable String nom) {
+	return commandeStatutService.findByNom(nom);
+}
 @GetMapping("/")
 public List<CommandeStatut> findAll() {
 	return commandeStatutService.findAll();

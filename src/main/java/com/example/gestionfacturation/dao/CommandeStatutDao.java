@@ -8,4 +8,5 @@ import com.example.gestionfacturation.bean.CommandeStatut;
 @Repository
 public interface CommandeStatutDao extends JpaRepository<CommandeStatut,Long> {
 	public  CommandeStatut findByCode(String code);
+	public  CommandeStatut findByNom(String nom);
 }

@@ -8,6 +8,7 @@ import com.example.gestionfacturation.bean.Expedition;
 @Repository
 public interface ExpeditionDao extends JpaRepository<Expedition,Long> {
 	public  Expedition findByCode(String code);
+	public  Expedition findByNom(String nom);
 
 
 }

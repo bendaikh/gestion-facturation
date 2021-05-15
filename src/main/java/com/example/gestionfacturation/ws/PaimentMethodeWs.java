@@ -29,5 +29,9 @@ public List<PaimentMethode> findAll() {
 public int save(@RequestBody PaimentMethode paimentMethode) {
 	return paimentMethodeService.save(paimentMethode);
 }
+@GetMapping("/nom/{nom}")
+public PaimentMethode findByNom(@PathVariable String nom) {
+	return paimentMethodeService.findByNom(nom);
+}
 
 }
