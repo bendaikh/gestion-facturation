@@ -14,7 +14,11 @@ public class QuotationStatusService {
         return quotationStatusDao.listOfQuotationStatus(mc);
     }
 
-    public int deleteByCode(String code) {
+    public List<QuotationStatus> findAll() {
+		return quotationStatusDao.findAll();
+	}
+
+	public int deleteByCode(String code) {
         return quotationStatusDao.deleteByCode(code);
     }
 

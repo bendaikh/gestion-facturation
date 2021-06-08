@@ -6,14 +6,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import com.example.gestionfacturation.enumeration.FactureStatut;
 import com.example.gestionfacturation.bean.Client;
 import com.example.gestionfacturation.bean.Commande;
 import com.example.gestionfacturation.bean.Currency;
 import com.example.gestionfacturation.bean.Devis;
 import com.example.gestionfacturation.bean.Facture;
 import com.example.gestionfacturation.bean.FactureEtat;
-import com.example.gestionfacturation.bean.FactureStatut;
+import com.example.gestionfacturation.enumeration.FactureStatut;
+import com.example.gestionfacturation.bean.Paiment;
 import com.example.gestionfacturation.dao.FactureDao;
 
 @Service
@@ -39,11 +40,20 @@ public class FactureService {
 		return factureDao.findByReference(reference);
 	}
 
+	public Commande findCommandeByFactureReference(String reference) {
+		return factureDao.findCommandeByFactureReference(reference);
+	}
+
+	
+
+	
+
 	@Transactional
 	public int deleteByReference(String reference) {
 		int p = paimentService.deleteByFactureReference(reference);
 		int f = factureDao.deleteByReference(reference);
-		return f + p;
+		return	p+f;
+		 
 	}
 
 	public List<Facture> findByRef(String reference) {
@@ -77,8 +87,8 @@ public class FactureService {
 		facture.setDevis(devis);
 		FactureEtat factureEtat =factureEtatService.findByReference(facture.getFactureEtat().getReference());
 		facture.setFactureEtat(factureEtat);
-		FactureStatut factureStatut= factureStatutService.findByReference(facture.getFactureStatut().getReference());
-		facture.setFactureStatut(factureStatut);
+//		FactureStatut factureStatut= factureStatutService.findByReference(facture.getFactureStatut().getReference());
+//		facture.setFactureStatut(factureStatut);
 		Currency currency=currencyService.findByCode(facture.getCurrency().getCode());
 		facture.setCurrency(currency);		
 		if (devis == null) {
@@ -91,15 +101,16 @@ public class FactureService {
 		if(factureEtat==null) {
 			return -5;
 		}
-		if(factureStatut==null) {
-			return -6;
-		}
+		//if(factureStatut==null) {
+	//		return -6;
+	//	}
 		if(currency==null) {
 			return -7;
 		}
 		prepare(facture);
 
 		factureDao.save(facture);
+		paimentService.save(facture,facture.getPaiments());
 		return 1;
 
 	}
@@ -108,6 +119,7 @@ public class FactureService {
 		double total = 0;
 		double totalHt = 0;
 		double totalHtnet = 0;
+		double reste = 0;
 		totalHt = facture.getPrix() * facture.getQuantite();
 		if (facture.getRemise_val() != 0 && facture.getRemise_pourcentage() == 0) {
 			totalHtnet = totalHt - facture.getRemise_val();
@@ -130,6 +142,33 @@ public class FactureService {
 		facture.setTotalHt(totalHt);
 		facture.setTotalHtnet(totalHtnet);
 		facture.setTotal(total);
+		for(Paiment paiment: facture.getPaiments()) {
+			reste=reste+paiment.getMontant();
+		}
+		reste= facture.getTotal()-reste;
+		facture.setReste(reste);
+		if(facture.isEn_litige()== false) {
+			if(facture.getPaiments().isEmpty()== true ) {
+				FactureStatut factureStatut = FactureStatut.Non_payée;
+				String s = factureStatut.getName();
+				facture.setFactureStatut(s);
+			}
+			else if (facture.getReste()>0 && facture.getReste()!=0  ) {
+				FactureStatut factureStatut = FactureStatut.Partiellement_payée;
+				String s = factureStatut.getName();
+				facture.setFactureStatut(s);
+			}
+			else if(facture.getReste()== 0 ) {
+				FactureStatut factureStatut = FactureStatut.Payée;
+				String s = factureStatut.getName();
+				facture.setFactureStatut(s);
+			}
+		}
+		else  {
+			FactureStatut factureStatut = FactureStatut.En_litige;
+			String s = factureStatut.getName();
+			facture.setFactureStatut(s);
+		}
 		return 1;
 	}
 

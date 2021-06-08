@@ -15,7 +15,7 @@ public interface DeliveryDao extends JpaRepository<Delivery,Long> {
 
     @Query("select d from Delivery d where d.reference like :mc or d.cmr_Commodity like :mc or d.cmr_Shipper like :mc")
     public List<Delivery> listOfDeliveries(@Param("mc") String mc);
-
+    public List<Delivery> findByCommandeReference(String reference);
     public int deleteByReference(String reference);
 
 }

@@ -15,7 +15,15 @@ public class DeliveryService {
         return deliveryDao.deleteByReference(reference);
     }
 
-    public Delivery findByReference(String reference) {
+    public List<Delivery> findAll() {
+		return deliveryDao.findAll();
+	}
+
+	public List<Delivery> findByCommandeReference(String reference) {
+		return deliveryDao.findByCommandeReference(reference);
+	}
+
+	public Delivery findByReference(String reference) {
         return deliveryDao.findByReference(reference);
     }
 

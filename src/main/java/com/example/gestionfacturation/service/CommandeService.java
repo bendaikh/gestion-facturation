@@ -27,8 +27,12 @@ public class CommandeService {
     public int deleteByReference(String reference) {
         return commandeDao.deleteByReference(reference);
     }
+    
+    public List<Commande> findAll() {
+		return commandeDao.findAll();
+	}
 
-    public int save(Commande commande) {
+	public int save(Commande commande) {
 
         if (findByReference(commande.getReference())!=null){
             return -1;

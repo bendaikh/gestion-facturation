@@ -23,8 +23,11 @@ public class CurrencyWS {
     public int deleteByCode(@PathVariable String code) {
         return currencyService.deleteByCode(code);
     }
-
-    @PostMapping("/")
+    @GetMapping("/")
+    public List<Currency> findAll() {
+		return currencyService.findAll();
+	}
+	@PostMapping("/")
     public int save(@RequestBody Currency currency) {
         return currencyService.save(currency);
     }

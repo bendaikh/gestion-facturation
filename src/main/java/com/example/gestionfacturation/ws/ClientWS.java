@@ -18,8 +18,11 @@ public class ClientWS {
     public List<Client> listOfClients(@PathVariable String mc) {
         return clientService.listOfClients(mc);
     }
-
-    @DeleteMapping("/code/{code}")
+    @GetMapping("/")
+    public List<Client> findAll() {
+		return clientService.findAll();
+	}
+	@DeleteMapping("/code/{code}")
     public int deleteByReference(@PathVariable String reference) {
         return clientService.deleteByReference(reference);
     }

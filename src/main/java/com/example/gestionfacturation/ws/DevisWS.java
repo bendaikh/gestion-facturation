@@ -2,6 +2,9 @@ package com.example.gestionfacturation.ws;
 
 import com.example.gestionfacturation.service.DevisService;
 import com.example.gestionfacturation.bean.Devis;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +23,11 @@ public class DevisWS {
     public int save(@RequestBody Devis devis) {
         return devisService.save(devis);
     }
+    @GetMapping("/")
+    public List<Devis> findAll() {
+		return devisService.findAll();
+	}
 
-    @Autowired
+	@Autowired
     private DevisService devisService;
 }

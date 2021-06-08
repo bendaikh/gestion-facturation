@@ -30,6 +30,10 @@ public class QuotationStatusWS {
     public QuotationStatus findByNom(@PathVariable String nom) {
 		return quotationStatusService.findByNom(nom);
 	}
+    @GetMapping("/")
+	public List<QuotationStatus> findAll() {
+		return quotationStatusService.findAll();
+	}
 
 	@Autowired
     private QuotationStatusService quotationStatusService;

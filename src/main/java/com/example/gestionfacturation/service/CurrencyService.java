@@ -21,6 +21,10 @@ public class CurrencyService {
 		return currencyDao.findByNom(nom);
 	}
 
+	public List<Currency> findAll() {
+		return currencyDao.findAll();
+	}
+
 	public int deleteByCode(String code) {
         return currencyDao.deleteByCode(code);
     }

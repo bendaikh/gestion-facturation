@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.gestionfacturation.bean.Commande;
 import com.example.gestionfacturation.bean.Facture;
 import com.example.gestionfacturation.service.FactureService;
 
@@ -41,6 +42,11 @@ public Integer count(@PathVariable String reference) {
   public List<Facture> findByDateCreation(@PathVariable Date dateCreation) {
 	return factureService.findByDateCreation(dateCreation);
 }
+@GetMapping("/commande/reference/{reference}")
+public Commande findCommandeByFactureReference(@PathVariable String reference) {
+	return factureService.findCommandeByFactureReference(reference);
+}
+
 @GetMapping("/")
 public List<Facture> findAll() {
 	return factureService.findAll();

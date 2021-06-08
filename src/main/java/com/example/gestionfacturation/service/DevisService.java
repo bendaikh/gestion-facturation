@@ -9,6 +9,8 @@ import com.example.gestionfacturation.bean.Devis;
 import com.example.gestionfacturation.bean.Expedition;
 import com.example.gestionfacturation.bean.QuotationStatus;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +23,12 @@ public class DevisService {
     public int deleteByReference(String reference) {
         return devisDao.deleteByReference(reference);
     }
+    
+    public List<Devis> findAll() {
+		return devisDao.findAll();
+	}
 
-    public int save(Devis devis) {
+	public int save(Devis devis) {
         if (findByReference(devis.getReference())!=null){
             return -1;
         }

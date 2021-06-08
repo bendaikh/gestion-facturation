@@ -1,17 +1,19 @@
 package com.example.gestionfacturation.bean;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-
+import com.example.gestionfacturation.enumeration.FactureStatut;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 
@@ -20,9 +22,9 @@ public class Facture {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String reference;
-	@JsonFormat(pattern = "dd-MM-yyyy")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date dateCreation;
-	@JsonFormat(pattern = "dd-MM-yyyy")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date dateEchaence;
 	private double prix;
 	private double quantite;
@@ -36,22 +38,31 @@ public class Facture {
 	private int cdtpaiment;
 	private String notes;
 	private String commentaire;
-	
+	private boolean comptabilise;
+	private boolean en_litige;
+	private double reste;
 	@ManyToOne
 	private FactureEtat factureEtat;
-	@ManyToOne
-	private FactureStatut factureStatut;
+	private String factureStatut;
 	
 	@ManyToOne
 	private Commande commande;
 
 	@ManyToOne
 	private Currency currency;
-	
-	
 	@OneToOne
 	private Devis devis;
+	@JsonProperty(access =  JsonProperty.Access.WRITE_ONLY)
+	@OneToMany(mappedBy = "facture")
+	List<Paiment> paiments;
 	
+	
+	public List<Paiment> getPaiments() {
+		return paiments;
+	}
+	public void setPaiments(List<Paiment> paiments) {
+		this.paiments = paiments;
+	}
 	public Devis getDevis() {
 		return devis;
 	}
@@ -60,6 +71,12 @@ public class Facture {
 	}
 
 	
+	public double getReste() {
+		return reste;
+	}
+	public void setReste(double reste) {
+		this.reste = reste;
+	}
 	public Commande getCommande() {
 		return commande;
 	}
@@ -121,6 +138,25 @@ public class Facture {
 	public void setTotal(double total) {
 		this.total = total;
 	}
+	
+	/**
+	 * @return the en_litige
+	 */
+	public boolean isEn_litige() {
+		return en_litige;
+	}
+	/**
+	 * @param en_litige the en_litige to set
+	 */
+	public void setEn_litige(boolean en_litige) {
+		this.en_litige = en_litige;
+	}
+	public boolean isComptabilise() {
+		return comptabilise;
+	}
+	public void setComptabilise(boolean comptabilise) {
+		this.comptabilise = comptabilise;
+	}
 	public double getRemise_val() {
 		return remise_val;
 	}
@@ -177,12 +213,14 @@ public class Facture {
 	public void setFactureEtat(FactureEtat factureEtat) {
 		this.factureEtat = factureEtat;
 	}
-	public FactureStatut getFactureStatut() {
+	public String getFactureStatut() {
 		return factureStatut;
 	}
-	public void setFactureStatut(FactureStatut factureStatut) {
+	public void setFactureStatut(String factureStatut) {
 		this.factureStatut = factureStatut;
 	}
+
+
 
 	
 	

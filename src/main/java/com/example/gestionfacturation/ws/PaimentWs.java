@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.gestionfacturation.bean.Facture;
 import com.example.gestionfacturation.bean.Paiment;
 import com.example.gestionfacturation.service.PaimentService;
 
@@ -23,6 +24,11 @@ private PaimentService paimentService;
 public Paiment findByReference(@PathVariable String reference) {
 	return paimentService.findByReference(reference);
 }
+@GetMapping("/paiment/facture/reference/{reference}")
+public Facture findFactureByPaimentReference(@PathVariable String reference) {
+	return paimentService.findFactureByPaimentReference(reference);
+}
+
 @GetMapping("/facture/reference/{reference}")
 public List<Paiment> findByFactureReference(@PathVariable String reference) {
 	return paimentService.findByFactureReference(reference);
@@ -31,9 +37,13 @@ public List<Paiment> findByFactureReference(@PathVariable String reference) {
 public List<Paiment> findAll() {
 	return paimentService.findAll();
 }
-@DeleteMapping("/reference/{reference}")
+@DeleteMapping("/facture/reference/{reference}")
 public int deleteByFactureReference(@PathVariable String reference) {
 	return paimentService.deleteByFactureReference(reference);
+}
+@DeleteMapping("/reference/{reference}")
+public int deleteByReference(@PathVariable String reference) {
+	return paimentService.deleteByReference(reference);
 }
 @GetMapping("/nombrepaiment/{reference}")
 public Integer count(@PathVariable String reference) {

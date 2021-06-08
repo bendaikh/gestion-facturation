@@ -23,6 +23,10 @@ public class ClientService {
 
   
 
+	public List<Client> findAll() {
+		return clientDao.findAll();
+	}
+
 	public Client findByReference(String reference) {
 		return clientDao.findByReference(reference);
 	}

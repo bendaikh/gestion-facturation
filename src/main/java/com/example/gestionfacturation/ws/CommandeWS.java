@@ -19,8 +19,13 @@ public class CommandeWS {
     public List<Commande> listCommandes(@PathVariable String mc) {
         return commandeService.listCommandes(mc);
     }
+    
+    @GetMapping("/")
+    public List<Commande> findAll() {
+		return commandeService.findAll();
+	}
 
-    @DeleteMapping("/reference/{reference}")
+	@DeleteMapping("/reference/{reference}")
     public int deleteByReference(@PathVariable String reference) {
         return commandeService.deleteByReference(reference);
     }

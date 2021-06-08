@@ -17,27 +17,29 @@ public class Paiment {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String reference;
-	@JsonFormat(pattern = "dd-MM-yyyy")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date datePaiment;
-	@JsonFormat(pattern = "dd-MM-yyyy")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date dateCreation;
 	private double montant;
 	private String commentaire;
 	private boolean comptabilise;
+	private boolean enregistre;
 	private double reste;
-
+	private String paimentStatut;
 	@ManyToOne
 	private Facture facture;
 	@ManyToOne
-	private Currency currency;
-	@ManyToOne
 	private PaimentMethode paimentMethode;
 	
-	public Currency getCurrency() {
-		return currency;
+	
+	
+	
+	public String getPaimentStatut() {
+		return paimentStatut;
 	}
-	public void setCurrency(Currency currency) {
-		this.currency = currency;
+	public void setPaimentStatut(String paimentStatut) {
+		this.paimentStatut = paimentStatut;
 	}
 	public double getReste() {
 		return reste;
@@ -101,5 +103,12 @@ public class Paiment {
 	public void setFacture(Facture facture) {
 		this.facture = facture;
 	}
+	public boolean isEnregistre() {
+		return enregistre;
+	}
+	public void setEnregistre(boolean enregistre) {
+		this.enregistre = enregistre;
+	}
+	
 	
 }

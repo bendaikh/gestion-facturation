@@ -26,15 +26,25 @@ public class DeliveryWS {
     public List<Delivery> listOfDeliveries(@PathVariable String mc) {
         return deliveryService.listOfDeliveries(mc);
     }
+    @GetMapping("/")
+    public List<Delivery> findAll() {
+		return deliveryService.findAll();
+	}
+//	@PostMapping("/")
+//    public void save(@RequestBody Commande commande,@RequestBody List<Delivery> deliveries) {
+//        deliveryService.save(commande, deliveries);
+//    }
 
-    @PostMapping("/")
-    public void save(@RequestBody Commande commande,@RequestBody List<Delivery> deliveries) {
-        deliveryService.save(commande, deliveries);
-    }
+
+
+	@GetMapping("/commande/reference/{reference}")
+    public List<Delivery> findByCommandeReference(@PathVariable String reference) {
+		return deliveryService.findByCommandeReference(reference);
+	}
 
 
 
 
-    @Autowired
+	@Autowired
     private DeliveryService deliveryService;
 }
